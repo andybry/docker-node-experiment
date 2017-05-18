@@ -6,8 +6,14 @@ DOCKER_RUN := docker run \
 	-p 9229:9229 \
 	node:7.10-alpine
 
+clean:
+	rm -rf node_modules
+
 deps:
 	${DOCKER_RUN} yarn install --cache-folder .yarn
+
+prod-deps:
+	${DOCKER_RUN} yarn install --cache-folder .yarn --production
 
 start: deps
 	${DOCKER_RUN} node .
@@ -21,7 +27,7 @@ start-dev: deps
 debug: deps
 	${DOCKER_RUN} node --inspect-brk=0.0.0.0:9229 .
 
-build: deps
+build: clean prod-deps
 	docker build -t andybry/docker-node-experiment .
 
 shell: deps
