@@ -12,6 +12,9 @@ deps:
 start: deps
 	${DOCKER_RUN} node .
 
+test: deps
+	${DOCKER_RUN} yarn mocha
+
 start-dev: deps
 	${DOCKER_RUN} yarn nodemon .
 
