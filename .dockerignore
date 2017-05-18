@@ -4,3 +4,4 @@ Dockerfile
 yarn.lock
 .git/
 .gitignore
+Makefile
