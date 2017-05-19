@@ -2,8 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_USER = credentials('DOCKER_LOGIN_usr')
-        DOCKER_PASSWORD = credentials('DOCKER_LOGIN_psd')
+        DOCKER_LOGIN = credentials('DOCKER_LOGIN')
     }
 
     stages {

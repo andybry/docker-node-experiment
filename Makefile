@@ -44,7 +44,7 @@ deploy: build
 	docker push andybry/docker-node-experiment
 
 docker-login:
-	docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+	docker login -u ${DOCKER_LOGIN_USR} -p ${DOCKER_LOGIN_PSW}
 
 docker-logout:
 	docker logout
