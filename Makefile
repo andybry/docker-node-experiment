@@ -11,6 +11,7 @@ clean:
 	rm -rf node_modules
 
 deps:
+	touch env.file
 	${DOCKER_RUN} yarn install --cache-folder .yarn
 
 prod-deps:
@@ -20,7 +21,6 @@ start: deps
 	${DOCKER_RUN} node .
 
 test: deps
-	touch env.file
 	${DOCKER_RUN} yarn mocha
 
 start-dev: deps
