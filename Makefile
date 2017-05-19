@@ -1,5 +1,6 @@
 DOCKER_IMAGE := node:7.10-alpine
 DOCKER_RUN := docker run \
+	--user node \
 	--rm \
 	-v `pwd`:/code \
 	-w /code \
