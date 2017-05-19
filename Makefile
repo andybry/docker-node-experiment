@@ -4,6 +4,7 @@ DOCKER_RUN := docker run \
 	-v `pwd`:/code \
 	-w /code \
 	-p 9229:9229 \
+	--env-file env.file \
 	node:7.10-alpine
 
 clean:
