@@ -20,6 +20,7 @@ start: deps
 	${DOCKER_RUN} node .
 
 test: deps
+	touch env.file
 	${DOCKER_RUN} yarn mocha
 
 start-dev: deps
