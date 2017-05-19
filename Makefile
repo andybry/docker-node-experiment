@@ -1,42 +1,43 @@
+DOCKER_IMAGE := node:7.10-alpine
 DOCKER_RUN := docker run \
 	--rm \
-	-it \
 	-v `pwd`:/code \
 	-w /code \
 	-p 9229:9229 \
-	--env-file env.file \
-	node:7.10-alpine
+	--env-file env.file
+DOCKER_NORMAL := ${DOCKER_RUN} ${DOCKER_IMAGE}
+DOCKER_TTY := ${DOCKER_RUN} -it ${DOCKER_IMAGE}
 
 clean:
 	rm -rf node_modules
 
 deps:
 	touch env.file
-	${DOCKER_RUN} yarn install --cache-folder .yarn
+	${DOCKER_NORMAL} yarn install --cache-folder .yarn
 
 prod-deps:
-	${DOCKER_RUN} yarn install --cache-folder .yarn --production
+	${DOCKER_NORMAL} yarn install --cache-folder .yarn --production
 
 start: deps
-	${DOCKER_RUN} node .
+	${DOCKER_NORMAL} node .
 
 test: deps
-	${DOCKER_RUN} yarn mocha
+	${DOCKER_NORMAL} yarn mocha
 
 start-dev: deps
-	${DOCKER_RUN} yarn nodemon .
+	${DOCKER_NORMAL} yarn nodemon .
 
 debug: deps
-	${DOCKER_RUN} node --inspect-brk=0.0.0.0:9229 .
+	${DOCKER_NORMAL} node --inspect-brk=0.0.0.0:9229 .
 
 build: clean prod-deps
 	docker build -t andybry/docker-node-experiment .
 
 shell: deps
-	${DOCKER_RUN} sh
+	${DOCKER_TTY} sh
 
 repl: deps
-	${DOCKER_RUN}
+	${DOCKER_TTY}
 
 deploy: build
 	docker push andybry/docker-node-experiment
