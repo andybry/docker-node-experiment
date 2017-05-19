@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_USER = credentials('DOCKER_LOGIN_usr')
-        DOCKER_PASSWORD = credentials('DOCKER_LOGIN_pwd')
+        DOCKER_PASSWORD = credentials('DOCKER_LOGIN_psd')
     }
 
     stages {
