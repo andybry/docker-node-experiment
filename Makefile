@@ -22,6 +22,7 @@ start: deps
 	${DOCKER_NORMAL} node .
 
 test: deps
+	${DOCKER_NORMAL} ls -l
 	${DOCKER_NORMAL} yarn mocha
 
 start-dev: deps
