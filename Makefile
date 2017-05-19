@@ -42,3 +42,11 @@ repl: deps
 
 deploy: build
 	docker push andybry/docker-node-experiment
+
+docker-login:
+	docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+
+docker-logout:
+	docker logout
+
+jenkins-deploy: docker-login deploy docker-logout
